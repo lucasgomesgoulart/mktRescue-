@@ -7,25 +7,25 @@ const services = [
     title: "Estratégia Digital",
     description:
       "[Sua copy aqui] Desenvolvemos estratégias personalizadas para o seu negócio.",
-    icon: "📊",
+    icon: "▲",
   },
   {
     title: "Gestão de Tráfego",
     description:
       "[Sua copy aqui] Anúncios otimizados que convertem visitantes em clientes.",
-    icon: "🎯",
+    icon: "⬤",
   },
   {
     title: "Branding",
     description:
       "[Sua copy aqui] Construímos marcas memoráveis e autênticas.",
-    icon: "✨",
+    icon: "■",
   },
   {
     title: "Social Media",
     description:
       "[Sua copy aqui] Presença digital que engaja e gera resultados.",
-    icon: "📱",
+    icon: "◆",
   },
 ];
 
@@ -59,11 +59,13 @@ export default function OurWorkSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               whileHover={{ y: -10 }}
-              className="bg-[#0f274f] p-8 rounded-2xl border border-[#1c3563] hover:border-white/40 transition-all cursor-pointer"
+              className="bg-[#0f274f] p-10 rounded-2xl border border-[#1c3563] hover:border-white/40 transition-all cursor-pointer"
             >
-              <div className="text-5xl mb-4">{service.icon}</div>
-              <h3 className="text-2xl font-bold mb-4">{service.title}</h3>
-              <p className="text-white/80">{service.description}</p>
+              <div className="flex items-center gap-4 mb-6 pl-2">
+                <div className="text-4xl flex-shrink-0">{service.icon}</div>
+                <h3 className="text-xl font-bold">{service.title}</h3>
+              </div>
+              <p className="text-white/75 text-sm leading-relaxed pl-2">{service.description}</p>
             </motion.div>
           ))}
         </div>
@@ -73,10 +75,10 @@ export default function OurWorkSection() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.8 }}
-          className="mt-16 text-center"
+          className="mt-12 text-center"
         >
           <h3 className="text-3xl font-bold mb-8">Como Funciona</h3>
-          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-8">
             <motion.div
               whileHover={{ scale: 1.05 }}
               className="text-center"
