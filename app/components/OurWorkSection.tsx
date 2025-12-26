@@ -1,123 +1,172 @@
 "use client";
 
-import { motion } from "framer-motion";
+import React from "react";
+import {
+    LineChartOutlined,
+    AimOutlined,
+    BgColorsOutlined,
+    MobileOutlined,
+} from "@ant-design/icons";
+import {
+    Card,
+    Col,
+    ConfigProvider,
+    Row,
+    Space,
+    Steps,
+    Typography,
+} from "antd";
+
+const { Title, Paragraph } = Typography;
 
 const services = [
-  {
-    title: "Estratégia Digital",
-    description:
-      "[Sua copy aqui] Desenvolvemos estratégias personalizadas para o seu negócio.",
-    icon: "▲",
-  },
-  {
-    title: "Gestão de Tráfego",
-    description:
-      "[Sua copy aqui] Anúncios otimizados que convertem visitantes em clientes.",
-    icon: "⬤",
-  },
-  {
-    title: "Branding",
-    description:
-      "[Sua copy aqui] Construímos marcas memoráveis e autênticas.",
-    icon: "■",
-  },
-  {
-    title: "Social Media",
-    description:
-      "[Sua copy aqui] Presença digital que engaja e gera resultados.",
-    icon: "◆",
-  },
+    {
+        title: "Estratégia Digital",
+        description:
+            "Desenvolvemos planejamentos táticos e estratégicos personalizados para escalar o seu negócio de forma previsível.",
+        icon: <LineChartOutlined />,
+    },
+    {
+        title: "Gestão de Tráfego",
+        description:
+            "Criação e otimização de campanhas de alta performance que transformam cliques em clientes reais.",
+        icon: <AimOutlined />,
+    },
+    {
+        title: "Branding & Design",
+        description:
+            "Construímos identidades visuais memoráveis que transmitem autoridade e conectam com seu público.",
+        icon: <BgColorsOutlined />,
+    },
+    {
+        title: "Social Media",
+        description:
+            "Gestão completa de presença digital para gerar engajamento, comunidade e vendas recorrentes. lorem ipsonleomr",
+        icon: <MobileOutlined />,
+    },
+];
+
+const steps = [
+    {
+        title: "Análise",
+        description:
+            "Entendemos seu negócio a fundo para encontrar oportunidades reais de crescimento.",
+    },
+    {
+        title: "Estratégia",
+        description:
+            "Criamos uma estratégia clara e personalizada com foco total em retorno sobre investimento.",
+    },
+    {
+        title: "Execução",
+        description:
+            "Colocamos o plano em prática, ajustando e otimizando para maximizar resultados.",
+    },
+
 ];
 
 export default function OurWorkSection() {
-  return (
-    <section
-      id="work"
-      className="min-h-screen flex items-center justify-center bg-[#0c1d3b] text-white py-24"
-    >
-      <div className="container mx-auto px-6 md:px-10 lg:px-12">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+    return (
+        <section
+            id="work"
+            className="w-full min-h-screen bg-[#050b14] text-white relative flex flex-col items-center justify-center overflow-x-hidden"
         >
-          <h2 className="text-5xl font-bold mb-6">Nosso Trabalho</h2>
-          <p className="text-xl text-white/70 max-w-2xl mx-auto">
-            [Sua copy aqui] Especialistas em transformar desafios em
-            oportunidades de crescimento.
-          </p>
-        </motion.div>
+            <ConfigProvider
+                theme={{
+                    token: {
+                        colorText: "#ffffff",
+                        colorTextSecondary: "rgba(255,255,255,0.7)",
+                        colorBgContainer: "rgba(255,255,255,0.04)",
+                        colorBorder: "rgba(255,255,255,0.12)",
+                        borderRadius: 16,
+                    },
+                    components: {
+                        Card: {
+                            colorBgContainer: "rgba(255,255,255,0.04)",
+                            colorBorderSecondary: "rgba(255,255,255,0.12)",
+                            boxShadow:
+                                "0 18px 40px -20px rgba(0,0,0,0.55), 0 8px 24px -18px rgba(0,0,0,0.4)",
+                        },
+                        Steps: {
+                            colorTextDescription: "rgba(255,255,255,0.75)",
+                            colorText: "#ffffff",
+                            colorPrimary: "#22c55e",
+                            colorPrimaryHover: "#34d399",
+                        },
+                    },
+                }}
+            >
+                <div className="w-full max-w-7xl mx-auto px-6 md:px-8 lg:px-12 py-20 flex flex-col items-center">
+                    <Space direction="vertical" size={40}>
+                        {/* Steps Section */}
+                        <div style={{ textAlign: "center" }} data-aos="fade-up">
+                            <Title level={2} style={{ color: "#fff", marginBottom: 8 }}>
+                                Como Funciona
+                            </Title>
+                            <Paragraph
+                                style={{ fontSize: 16, color: "rgba(255,255,255,0.7)", marginBottom: 32 }}
+                            >
+                                Nosso processo simplificado para o seu sucesso
+                            </Paragraph>
+                            <div data-aos="fade-up" data-aos-delay="200">
+                                <Steps
+                                    current={steps.length}
+                                    direction="horizontal"
+                                    responsive
+                                    size="default"
+                                    items={steps.map((step) => ({
+                                        title: step.title,
+                                        description: step.description,
+                                    }))}
+                                />
+                            </div>
+                        </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {services.map((service, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{ y: -10 }}
-              className="bg-[#0f274f] p-10 rounded-2xl border border-[#1c3563] hover:border-white/40 transition-all cursor-pointer"
-            >
-              <div className="flex items-center gap-4 mb-6 pl-2">
-                <div className="text-4xl flex-shrink-0">{service.icon}</div>
-                <h3 className="text-xl font-bold">{service.title}</h3>
-              </div>
-              <p className="text-white/75 text-sm leading-relaxed pl-2">{service.description}</p>
-            </motion.div>
-          ))}
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.8 }}
-          className="mt-12 text-center"
-        >
-          <h3 className="text-3xl font-bold mb-8">Como Funciona</h3>
-          <div className="grid md:grid-cols-3 gap-8">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="text-center"
-            >
-              <div className="w-16 h-16 bg-white text-black rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
-                1
-              </div>
-              <h4 className="text-xl font-semibold mb-2">Análise</h4>
-              <p className="text-white/75">
-                [Sua copy] Entendemos seu negócio e objetivos
-              </p>
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="text-center"
-            >
-              <div className="w-16 h-16 bg-white text-black rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
-                2
-              </div>
-              <h4 className="text-xl font-semibold mb-2">Estratégia</h4>
-              <p className="text-white/75">
-                [Sua copy] Criamos um plano personalizado
-              </p>
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="text-center"
-            >
-              <div className="w-16 h-16 bg-white text-black rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
-                3
-              </div>
-              <h4 className="text-xl font-semibold mb-2">Resultado</h4>
-              <p className="text-white/75">
-                [Sua copy] Executamos e otimizamos continuamente
-              </p>
-            </motion.div>
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
+                        {/* Services Section */}
+                        <div style={{ textAlign: "center" }} data-aos="fade-up">
+                            <Title level={3} style={{ color: "#fff", marginBottom: 12 }}>
+                                Nossas Especialidades
+                            </Title>
+                            <Paragraph
+                                style={{
+                                    color: "rgba(255,255,255,0.7)",
+                                    marginBottom: 32,
+                                    fontSize: 14,
+                                    fontWeight: 500,
+                                }}
+                            >
+                                Combinamos dados, criatividade e tecnologia para oferecer soluções
+                                completas que resolvem dores reais de crescimento.
+                            </Paragraph>
+                            <Row gutter={[16, 16]} align="top">
+                                {services.map((service, index) => (
+                                    <Col xs={24} sm={12} lg={6} key={service.title + index} data-aos="zoom-in" data-aos-delay={index * 100}>
+                                        <Card
+                                            hoverable
+                                            style={{ height: "auto" }}
+                                            bodyStyle={{ padding: 20, display: "flex", flexDirection: "column", gap: 12 }}
+                                        >
+                                            <Space direction="vertical" size={8}>
+                                                <div style={{ fontSize: 24, color: "#22c55e" }}>
+                                                    {service.icon}
+                                                </div>
+                                                <Title level={5} style={{ color: "#fff", margin: 0 }}>
+                                                    {service.title}
+                                                </Title>
+                                                <Paragraph
+                                                    style={{ color: "rgba(255,255,255,0.7)", margin: 0, fontSize: 12 }}
+                                                >
+                                                    {service.description}
+                                                </Paragraph>
+                                            </Space>
+                                        </Card>
+                                    </Col>
+                                ))}
+                            </Row>
+                        </div>
+                    </Space>
+                </div>
+            </ConfigProvider>
+        </section>
+    );
 }

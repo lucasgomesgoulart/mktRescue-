@@ -1,103 +1,50 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
-import { Input, Select, Button, ConfigProvider } from "antd";
+import { Form, Input, Select, Button, ConfigProvider, theme } from "antd";
 
 export default function HeroSection() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    schedule: "",
-    investment: "",
-    teamSize: "",
-    message: "",
-  });
+  const [form] = Form.useForm();
 
   const scheduleOptions = [
-    "9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h", "18h", "O mais breve possível",
+    { value: "9h", label: "09:00" },
+    { value: "10h", label: "10:00" },
+    { value: "11h", label: "11:00" },
+    { value: "14h", label: "14:00" },
+    { value: "15h", label: "15:00" },
+    { value: "16h", label: "16:00" },
+    { value: "brief", label: "O mais rápido possível" },
   ];
 
   const investmentOptions = [
-    "De R$2.000 a R$3.000 (mínimo)",
-    "De R$3.000 a R$7.000",
-    "Acima de R$7.000",
+    { value: "low", label: "Até R$ 3.000" },
+    { value: "medium", label: "R$ 3.000 a R$ 7.000" },
+    { value: "high", label: "Acima de R$ 7.000" },
   ];
 
   const teamSizeOptions = [
-    "Trabalho sozinho",
-    "1 a 5 funcionários",
-    "6 a 15 funcionários",
-    "Mais de 15 funcionários",
+    { value: "solo", label: "Trabalho sozinho" },
+    { value: "small", label: "1 - 5 pessoas" },
+    { value: "medium", label: "6 - 15 pessoas" },
+    { value: "large", label: "15+ pessoas" },
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // EmailJS integration will go here
-    console.log("Form submitted:", formData);
-  };
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  // Configuração de tema para ANTD
-  const inputStyle = {
-    backgroundColor: "rgba(255, 255, 255, 0.05)",
-    border: "0.5px solid rgba(255, 255, 255, 0.2)",
-    borderRadius: "1rem",
-    color: "white",
-    backdropFilter: "blur(12px)",
-    boxShadow: "inset 0 2px 4px rgba(0, 0, 0, 0.1)",
-    padding: "12px 16px",
-  };
-
-  const labelClasses = "text-sm font-bold text-white mb-4 block tracking-wide";
-
-  const antdTheme = {
-    token: {
-      colorTextPlaceholder: "rgba(12, 29, 59, 0.4)",
-      colorBgContainer: "transparent",
-      colorBorder: "rgba(12, 29, 59, 0.1)",
-      borderRadius: 8,
-      controlHeight: 48,
-      fontSize: 16,
-      colorText: "#0c1d3b",
-    },
-    components: {
-      Input: {
-        colorBgContainer: "transparent",
-        colorBorder: "rgba(12, 29, 59, 0.2)",
-        colorText: "#0c1d3b",
-        borderRadius: 8,
-        controlHeight: 48,
-      },
-      Select: {
-        colorBgContainer: "rgba(12, 29, 59, 0.03)",
-        colorBorder: "rgba(12, 29, 59, 0.1)",
-        colorText: "#0c1d3b",
-        colorTextPlaceholder: "rgba(12, 29, 59, 0.4)",
-        borderRadius: 8,
-        controlHeight: 48,
-      },
-      Button: {
-        colorBgContainer: "#0c1d3b",
-        colorBorder: "transparent",
-      },
-    },
+  const onFinish = (values: any) => {
+    console.log("Dados do formulário:", values);
   };
 
   return (
     <section
       id="hero"
-      className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-[#0c1d3b]/5 to-[#0c1d3b]/10 pt-20"
+      className="flex items-center justify-center min-h-[90vh] bg-slate-50 pt-16 relative overflow-hidden"
     >
-      <div className="container mx-auto px-6 md:px-10 lg:px-12 py-24">
-        <div className="grid md:grid-cols-2 gap-14 lg:gap-20 items-center">
-          {/* Text Content */}
+      {/* Background Geral sutil para a página não ficar totalmente branca */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-[#0c1d3b]/5 to-[#0c1d3b]/10 -z-10" />
+
+      <div className="container mx-auto px-6 md:px-10 lg:px-12 py-12">
+        <div className="grid md:grid-cols-2 gap-10 lg:gap-16 items-center">
+          
+          {/* Lado Esquerdo: Conteúdo de Texto */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -105,7 +52,7 @@ export default function HeroSection() {
             transition={{ duration: 0.8 }}
           >
             <motion.h2
-              className="text-5xl md:text-6xl font-bold mb-6 leading-tight text-[#0c1d3b]"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-[#0c1d3b]"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -118,215 +65,170 @@ export default function HeroSection() {
               do Seu Marketing
             </motion.h2>
             <motion.p
-              className="text-xl text-[#0c1d3b]/80 mb-8 leading-relaxed"
+              className="text-lg text-[#0c1d3b]/80 mb-8 leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.4 }}
             >
-              [Sua copy chamativa vai aqui] Transformamos desafios em
-              oportunidades e levamos sua marca ao próximo nível com estratégias validadas.
+              Transformamos desafios em oportunidades e levamos sua marca ao
+              próximo nível com estratégias validadas.
             </motion.p>
+            
             <motion.div
-              className="flex gap-6"
+              className="flex gap-4"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.6 }}
             >
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_10px_rgba(16,185,129,0.8)]"></div>
-                <span className="text-[#0c1d3b] font-medium">Estratégia</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_10px_rgba(16,185,129,0.8)]"></div>
-                <span className="text-[#0c1d3b] font-medium">Resultado</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_10px_rgba(16,185,129,0.8)]"></div>
-                <span className="text-[#0c1d3b] font-medium">Crescimento</span>
-              </div>
+              {["Estratégia", "Resultado", "Crescimento"].map((item, idx) => (
+                <div key={idx} className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_10px_rgba(16,185,129,0.8)]"></div>
+                  <span className="text-[#0c1d3b] font-medium">{item}</span>
+                </div>
+              ))}
             </motion.div>
           </motion.div>
 
-          {/* Form Container with Apple-style Design */}
+          {/* Lado Direito: Formulário Glass Gradient */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="relative"
+            className="relative flex justify-center items-center" // Centraliza o form sobre os blobs
           >
-            <div className="relative">
-              <div className="text-center mb-8">
+            {/* --- BLOBS DE CORES (DEGRADÊ DE FUNDO) --- */}
+            {/* Bola Verde Esmeralda */}
+            <div className="absolute top-0 right-10 w-64 h-64 bg-emerald-400 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-pulse"></div>
+            {/* Bola Azul Profundo */}
+            <div className="absolute -bottom-10 left-10 w-72 h-72 bg-[#0c1d3b] rounded-full mix-blend-multiply filter blur-[80px] opacity-40"></div>
+            {/* Bola Ciano/Clara */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-cyan-300 rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
+
+            {/* --- CONTAINER DO FORMULÁRIO (EFEITO VIDRO) --- */}
+            <div className="relative w-full p-6 lg:p-8 rounded-3xl shadow-2xl backdrop-blur-xl border border-white/40 bg-white/20">
+              
+              <div className="text-center mb-6">
                 <h3 className="text-2xl font-bold text-[#0c1d3b]">Vamos conversar?</h3>
-                <p className="text-[#0c1d3b]/60 mt-2 text-sm">
-                  Preencha para receber uma análise gratuita.
+                <p className="text-[#0c1d3b]/80 text-sm mt-1 font-medium">
+                  Receba sua análise gratuita.
                 </p>
               </div>
 
-              <ConfigProvider theme={antdTheme}>
-                <form
-                  onSubmit={handleSubmit}
-                  className="space-y-8"
+              {/* Tema Configurado para Inputs Semitransparentes */}
+              <ConfigProvider
+                theme={{
+                  algorithm: theme.defaultAlgorithm,
+                  token: {
+                    // Fundo dos inputs mais branco para legibilidade sobre o vidro
+                    colorBgContainer: "rgba(255, 255, 255, 0.5)", 
+                    colorBorder: "transparent", // Remove borda padrão para look clean
+                    colorText: "#0c1d3b",
+                    colorTextPlaceholder: "rgba(12, 29, 59, 0.5)",
+                    colorPrimary: "#10b981", // Emerald
+                    borderRadius: 12, // Inputs mais arredondados
+                    controlHeight: 45,
+                    fontSize: 14,
+                  },
+                  components: {
+                    Input: {
+                      activeBg: "rgba(255,255,255, 0.8)", // Fica mais branco ao clicar
+                      hoverBg: "rgba(255,255,255, 0.6)",
+                    },
+                    Select: {
+                      selectorBg: "rgba(255, 255, 255, 0.5)",
+                    },
+                    Button: {
+                      colorPrimary: "#0c1d3b",
+                      fontWeight: 700,
+                    }
+                  },
+                }}
+              >
+                <Form
+                  form={form}
+                  layout="vertical"
+                  onFinish={onFinish}
+                  requiredMark={false}
+                  className="w-full"
                 >
-                  {/* Nome */}
-                  <div className="relative">
-                    <Input
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      placeholder="Nome completo"
-                      size="large"
-                      className="!text-[#0c1d3b] !text-base !bg-transparent !border-0 !border-b !border-[#0c1d3b]/20 !rounded-none !p-0 !py-3 !placeholder-[#0c1d3b]/40 focus:!border-[#0c1d3b]/50 focus:!shadow-none font-semibold"
-                      style={{
-                        backgroundColor: "transparent",
-                        borderBottom: "1px solid rgba(12, 29, 59, 0.2)",
-                        padding: "12px 0",
-                      }}
-                    />
-                  </div>
-
-                  {/* Email */}
-                  <div className="relative">
-                    <Input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder="E-mail"
-                      size="large"
-                      className="!text-[#0c1d3b] !text-base !bg-transparent !border-0 !border-b !border-[#0c1d3b]/20 !rounded-none !p-0 !py-3 !placeholder-[#0c1d3b]/40 focus:!border-[#0c1d3b]/50 focus:!shadow-none font-semibold"
-                      style={{
-                        backgroundColor: "transparent",
-                        borderBottom: "1px solid rgba(12, 29, 59, 0.2)",
-                        padding: "12px 0",
-                      }}
-                    />
-                  </div>
-
-                  {/* WhatsApp */}
-                  <div className="relative">
-                    <Input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      placeholder="WhatsApp"
-                      size="large"
-                      className="!text-[#0c1d3b] !text-base !bg-transparent !border-0 !border-b !border-[#0c1d3b]/20 !rounded-none !p-0 !py-3 !placeholder-[#0c1d3b]/40 focus:!border-[#0c1d3b]/50 focus:!shadow-none font-semibold"
-                      style={{
-                        backgroundColor: "transparent",
-                        borderBottom: "1px solid rgba(12, 29, 59, 0.2)",
-                        padding: "12px 0",
-                      }}
-                    />
-                  </div>
-
-                  {/* Horário */}
-                  <div className="relative pt-2">
-                    {formData.schedule && (
-                      <label className="absolute -top-0 left-0 text-xs text-[#0c1d3b]/60 font-medium">
-                        Melhor horário
-                      </label>
-                    )}
-                    <Select
-                      value={formData.schedule || undefined}
-                      onChange={(value) =>
-                        setFormData({ ...formData, schedule: value })
-                      }
-                      placeholder="Melhor horário"
-                      size="middle"
-                      className="!text-[#0c1d3b] apple-select !bg-transparent !border-0 !border-b !border-[#0c1d3b]/20 !rounded-none font-semibold"
-                      style={{ width: "100%", backgroundColor: "transparent", borderBottom: "1px solid rgba(12, 29, 59, 0.2)", borderRadius: 0, padding: "12px 0" }}
-                      options={scheduleOptions.map((option) => ({
-                        label: option,
-                        value: option,
-                      }))}
-                    />
-                  </div>
-
-                  {/* Investimento */}
-                  <div className="relative pt-2">
-                    {formData.investment && (
-                      <label className="absolute -top-0 left-0 text-xs text-[#0c1d3b]/60 font-medium">
-                        Investimento mensal
-                      </label>
-                    )}
-                    <Select
-                      value={formData.investment || undefined}
-                      onChange={(value) =>
-                        setFormData({ ...formData, investment: value })
-                      }
-                      placeholder="Investimento mensal"
-                      size="middle"
-                      className="!text-[#0c1d3b] apple-select !bg-transparent !border-0 !border-b !border-[#0c1d3b]/20 !rounded-none font-semibold"
-                      style={{ width: "100%", backgroundColor: "transparent", borderBottom: "1px solid rgba(12, 29, 59, 0.2)", borderRadius: 0, padding: "12px 0" }}
-                      options={investmentOptions.map((option) => ({
-                        label: option,
-                        value: option,
-                      }))}
-                    />
-                  </div>
-
-                  {/* Team Size */}
-                  <div className="relative pt-2">
-                    {formData.teamSize && (
-                      <label className="absolute -top-0 left-0 text-xs text-[#0c1d3b]/60 font-medium">
-                        Tamanho do time
-                      </label>
-                    )}
-                    <Select
-                      value={formData.teamSize || undefined}
-                      onChange={(value) =>
-                        setFormData({ ...formData, teamSize: value })
-                      }
-                      placeholder="Tamanho do time"
-                      size="middle"
-                      className="!text-[#0c1d3b] apple-select !bg-transparent !border-0 !border-b !border-[#0c1d3b]/20 !rounded-none font-semibold"
-                      style={{marginBottom: "15px", width: "100%", backgroundColor: "transparent", borderBottom: "1px solid rgba(12, 29, 59, 0.2)", borderRadius: 0, padding: "12px 0" }}
-                      options={teamSizeOptions.map((option) => ({
-                        label: option,
-                        value: option,
-                      }))}
-                    />
-                  </div>
-
-                  {/* Message */}
-                  <div className="relative mt-8 mb-8">
-                    <Input.TextArea
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      rows={2}
-                      placeholder="Conte sobre sua empresa"
-                      className="!text-[#0c1d3b] !text-base !bg-[#0c1d3b]/5 !border !border-[#0c1d3b]/10 !rounded-lg !placeholder-[#0c1d3b]/40 focus:!border-[#0c1d3b]/30 focus:!shadow-none"
-                      style={{
-                        backgroundColor: "rgba(12, 29, 59, 0.05)",
-                        borderRadius: "8px",
-                        padding: "12px",
-                        marginBottom: "15px"
-                      }}
-                    />
-                  </div>
-
-                  {/* Submit Button */}
-                  <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className=""
+                  <Form.Item
+                    name="name"
+                    label={<span className="text-[#0c1d3b] font-bold text-xs uppercase tracking-wider ml-1">Nome</span>}
+                    rules={[{ required: true, message: "Obrigatório" }]}
                   >
+                    <Input placeholder="Seu nome" className="backdrop-blur-sm" />
+                  </Form.Item>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <Form.Item
+                      name="email"
+                      label={<span className="text-[#0c1d3b] font-bold text-xs uppercase tracking-wider ml-1">E-mail</span>}
+                      rules={[{ required: true, type: "email", message: "Inválido" }]}
+                    >
+                      <Input placeholder="seu@email.com" className="backdrop-blur-sm" />
+                    </Form.Item>
+
+                    <Form.Item
+                      name="phone"
+                      label={<span className="text-[#0c1d3b] font-bold text-xs uppercase tracking-wider ml-1">WhatsApp</span>}
+                      rules={[{ required: true, message: "Obrigatório" }]}
+                    >
+                      <Input placeholder="(00) 99999-9999" className="backdrop-blur-sm" />
+                    </Form.Item>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <Form.Item
+                      name="schedule"
+                      label={<span className="text-[#0c1d3b] font-bold text-xs uppercase tracking-wider ml-1">Horário</span>}
+                      rules={[{ required: true, message: "Selecione" }]}
+                    >
+                      <Select placeholder="Escolha" options={scheduleOptions} popupMatchSelectWidth={false} />
+                    </Form.Item>
+
+                    <Form.Item
+                      name="investment"
+                      label={<span className="text-[#0c1d3b] font-bold text-xs uppercase tracking-wider ml-1">Investimento</span>}
+                      rules={[{ required: true, message: "Selecione" }]}
+                    >
+                      <Select placeholder="Valor mensal" options={investmentOptions} popupMatchSelectWidth={false} />
+                    </Form.Item>
+                  </div>
+
+                  <Form.Item
+                    name="teamSize"
+                    label={<span className="text-[#0c1d3b] font-bold text-xs uppercase tracking-wider ml-1">Equipe</span>}
+                    rules={[{ required: true, message: "Selecione" }]}
+                  >
+                    <Select placeholder="Tamanho do time" options={teamSizeOptions} />
+                  </Form.Item>
+
+                  <Form.Item
+                    name="message"
+                    label={<span className="text-[#0c1d3b] font-bold text-xs uppercase tracking-wider ml-1">Objetivo</span>}
+                    style={{ marginBottom: 20 }}
+                  >
+                    <Input.TextArea
+                      rows={2}
+                      placeholder="Breve descrição..."
+                      className="resize-none backdrop-blur-sm"
+                    />
+                  </Form.Item>
+
+                  <Form.Item className="mb-0">
                     <Button
                       type="primary"
                       htmlType="submit"
-                      size="large"
-                      className="w-full !bg-[#0c1d3b] !hover:bg-[#0c1d3b]/90 !border-0 !text-white !font-semibold !text-base !rounded-lg !h-auto !py-3"
+                      block
+                      className="h-12 uppercase tracking-wide border-none bg-emerald-600 hover:!bg-emerald-500 text-white shadow-lg shadow-emerald-500/30 transition-all hover:scale-[1.02] active:scale-[0.98]"
                     >
-                      Começar análise
+                      Impulsionar Resultados
                     </Button>
-                  </motion.div>
-                </form>
+                  </Form.Item>
+                </Form>
               </ConfigProvider>
             </div>
           </motion.div>

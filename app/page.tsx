@@ -23,16 +23,14 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="bg-white text-black">
+    <div className="bg-white text-black overflow-x-hidden">
       <Header />
-      
       {/* Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-black z-50 origin-left"
         style={{ scaleX: scrollProgress }}
       />
-
-      <main className="scroll-smooth pt-24">
+      <main className="scroll-smooth overflow-x-hidden">
         <HeroSection />
         <OurWorkSection />
         <AboutSection />
