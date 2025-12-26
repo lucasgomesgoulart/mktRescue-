@@ -36,12 +36,11 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="flex items-center justify-center min-h-[90vh] bg-slate-50 pt-16 relative overflow-hidden"
+      // Mantemos min-h-screen e pt-20 para compensar o header
+      className="flex items-center justify-center min-h-screen bg-gradient-to-br from-slate-50 via-[#0c1d3b]/5 to-[#0c1d3b]/10 pt-20 relative overflow-hidden"
     >
-      {/* Background Geral sutil para a página não ficar totalmente branca */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-[#0c1d3b]/5 to-[#0c1d3b]/10 -z-10" />
-
-      <div className="container mx-auto px-6 md:px-10 lg:px-12 py-12">
+      {/* Ajuste de espaçamento vertical: py-6 (antes era py-2 muito pequeno, ou py-12 muito grande) */}
+      <div className="container mx-auto px-6 md:px-10 lg:px-12 py-6">
         <div className="grid md:grid-cols-2 gap-10 lg:gap-16 items-center">
           
           {/* Lado Esquerdo: Conteúdo de Texto */}
@@ -52,7 +51,8 @@ export default function HeroSection() {
             transition={{ duration: 0.8 }}
           >
             <motion.h2
-              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight text-[#0c1d3b]"
+              // Aumentei o tamanho da fonte para restaurar o impacto
+              className="text-4xl md:text-5xl lg:text-6xl font-bold mb-5 leading-tight text-[#0c1d3b]"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -71,8 +71,8 @@ export default function HeroSection() {
               viewport={{ once: true }}
               transition={{ delay: 0.4 }}
             >
-              Transformamos desafios em oportunidades e levamos sua marca ao
-              próximo nível com estratégias validadas.
+              [Sua copy chamativa vai aqui] Transformamos desafios em
+              oportunidades e levamos sua marca ao próximo nível com estratégias validadas.
             </motion.p>
             
             <motion.div
@@ -85,64 +85,64 @@ export default function HeroSection() {
               {["Estratégia", "Resultado", "Crescimento"].map((item, idx) => (
                 <div key={idx} className="flex items-center gap-2">
                   <div className="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_10px_rgba(16,185,129,0.8)]"></div>
-                  <span className="text-[#0c1d3b] font-medium">{item}</span>
+                  <span className="text-[#0c1d3b] font-medium text-base">{item}</span>
                 </div>
               ))}
             </motion.div>
           </motion.div>
 
-          {/* Lado Direito: Formulário Glass Gradient */}
+          {/* Lado Direito: Formulário */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="relative flex justify-center items-center" // Centraliza o form sobre os blobs
+            className="relative"
           >
-            {/* --- BLOBS DE CORES (DEGRADÊ DE FUNDO) --- */}
-            {/* Bola Verde Esmeralda */}
-            <div className="absolute top-0 right-10 w-64 h-64 bg-emerald-400 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-pulse"></div>
-            {/* Bola Azul Profundo */}
-            <div className="absolute -bottom-10 left-10 w-72 h-72 bg-[#0c1d3b] rounded-full mix-blend-multiply filter blur-[80px] opacity-40"></div>
-            {/* Bola Ciano/Clara */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-cyan-300 rounded-full mix-blend-multiply filter blur-3xl opacity-50"></div>
+            <div className="absolute -top-10 -right-10 w-40 h-40 bg-emerald-400/20 rounded-full blur-3xl pointer-events-none"></div>
+            <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-[#0c1d3b]/10 rounded-full blur-3xl pointer-events-none"></div>
 
-            {/* --- CONTAINER DO FORMULÁRIO (EFEITO VIDRO) --- */}
-            <div className="relative w-full p-6 lg:p-8 rounded-3xl shadow-2xl backdrop-blur-xl border border-white/40 bg-white/20">
+            {/* Aumentei padding para p-6 ou p-8 para dar "corpo" ao card novamente */}
+            <div className="relative p-6 lg:p-7 rounded-3xl shadow-2xl backdrop-blur-2xl border border-white/40 bg-gradient-to-br from-gray-100/95 via-gray-50/90 to-gray-200/60 max-w-md mx-auto">
               
-              <div className="text-center mb-6">
+              <div className="text-center mb-5">
                 <h3 className="text-2xl font-bold text-[#0c1d3b]">Vamos conversar?</h3>
-                <p className="text-[#0c1d3b]/80 text-sm mt-1 font-medium">
+                <p className="text-[#0c1d3b]/70 text-sm mt-1">
                   Receba sua análise gratuita.
                 </p>
               </div>
 
-              {/* Tema Configurado para Inputs Semitransparentes */}
               <ConfigProvider
                 theme={{
-                  algorithm: theme.defaultAlgorithm,
+                  algorithm: theme.defaultAlgorithm, 
                   token: {
-                    // Fundo dos inputs mais branco para legibilidade sobre o vidro
-                    colorBgContainer: "rgba(255, 255, 255, 0.5)", 
-                    colorBorder: "transparent", // Remove borda padrão para look clean
+                    colorBgContainer: "rgba(255, 255, 255, 0.7)",
+                    colorBorder: "rgba(12, 29, 59, 0.1)",
                     colorText: "#0c1d3b",
-                    colorTextPlaceholder: "rgba(12, 29, 59, 0.5)",
-                    colorPrimary: "#10b981", // Emerald
-                    borderRadius: 12, // Inputs mais arredondados
-                    controlHeight: 45,
-                    fontSize: 14,
+                    colorTextPlaceholder: "rgba(12, 29, 59, 0.4)",
+                    colorPrimary: "#10b981",
+                    borderRadius: 8,
+                    controlHeight: 40, // Aumentei de 32 para 40 (Tamanho médio confortável)
+                    fontSize: 14,      // Fonte normal
                   },
                   components: {
+                    Form: {
+                      itemMarginBottom: 10, // Aumentei espaçamento entre campos
+                      verticalLabelPadding: "0 0 4px", 
+                      labelFontSize: 13,
+                    },
                     Input: {
-                      activeBg: "rgba(255,255,255, 0.8)", // Fica mais branco ao clicar
-                      hoverBg: "rgba(255,255,255, 0.6)",
+                      activeBorderColor: "#10b981",
+                      hoverBorderColor: "#10b981",
                     },
                     Select: {
-                      selectorBg: "rgba(255, 255, 255, 0.5)",
+                      selectorBg: "rgba(255, 255, 255, 0.7)",
                     },
                     Button: {
                       colorPrimary: "#0c1d3b",
+                      algorithm: true,
                       fontWeight: 700,
+                      controlHeight: 44, // Botão mais robusto
                     }
                   },
                 }}
@@ -153,54 +153,55 @@ export default function HeroSection() {
                   onFinish={onFinish}
                   requiredMark={false}
                   className="w-full"
+                  // Removi size="small" para ele usar o tamanho normal configurado no token
                 >
                   <Form.Item
                     name="name"
-                    label={<span className="text-[#0c1d3b] font-bold text-xs uppercase tracking-wider ml-1">Nome</span>}
+                    label={<span className="text-[#0c1d3b] font-semibold">Nome</span>}
                     rules={[{ required: true, message: "Obrigatório" }]}
                   >
-                    <Input placeholder="Seu nome" className="backdrop-blur-sm" />
+                    <Input placeholder="Seu nome" />
                   </Form.Item>
 
                   <div className="grid grid-cols-2 gap-3">
                     <Form.Item
                       name="email"
-                      label={<span className="text-[#0c1d3b] font-bold text-xs uppercase tracking-wider ml-1">E-mail</span>}
+                      label={<span className="text-[#0c1d3b] font-semibold">E-mail</span>}
                       rules={[{ required: true, type: "email", message: "Inválido" }]}
                     >
-                      <Input placeholder="seu@email.com" className="backdrop-blur-sm" />
+                      <Input placeholder="seu@email.com" />
                     </Form.Item>
 
                     <Form.Item
                       name="phone"
-                      label={<span className="text-[#0c1d3b] font-bold text-xs uppercase tracking-wider ml-1">WhatsApp</span>}
+                      label={<span className="text-[#0c1d3b] font-semibold">WhatsApp</span>}
                       rules={[{ required: true, message: "Obrigatório" }]}
                     >
-                      <Input placeholder="(00) 99999-9999" className="backdrop-blur-sm" />
+                      <Input placeholder="(00) 99..." />
                     </Form.Item>
                   </div>
 
                   <div className="grid grid-cols-2 gap-3">
                     <Form.Item
                       name="schedule"
-                      label={<span className="text-[#0c1d3b] font-bold text-xs uppercase tracking-wider ml-1">Horário</span>}
+                      label={<span className="text-[#0c1d3b] font-semibold">Horário</span>}
                       rules={[{ required: true, message: "Selecione" }]}
                     >
-                      <Select placeholder="Escolha" options={scheduleOptions} popupMatchSelectWidth={false} />
+                      <Select placeholder="Escolha" options={scheduleOptions} />
                     </Form.Item>
 
                     <Form.Item
                       name="investment"
-                      label={<span className="text-[#0c1d3b] font-bold text-xs uppercase tracking-wider ml-1">Investimento</span>}
+                      label={<span className="text-[#0c1d3b] font-semibold">Investimento</span>}
                       rules={[{ required: true, message: "Selecione" }]}
                     >
-                      <Select placeholder="Valor mensal" options={investmentOptions} popupMatchSelectWidth={false} />
+                      <Select placeholder="Valor" options={investmentOptions} />
                     </Form.Item>
                   </div>
 
                   <Form.Item
                     name="teamSize"
-                    label={<span className="text-[#0c1d3b] font-bold text-xs uppercase tracking-wider ml-1">Equipe</span>}
+                    label={<span className="text-[#0c1d3b] font-semibold">Equipe</span>}
                     rules={[{ required: true, message: "Selecione" }]}
                   >
                     <Select placeholder="Tamanho do time" options={teamSizeOptions} />
@@ -208,24 +209,25 @@ export default function HeroSection() {
 
                   <Form.Item
                     name="message"
-                    label={<span className="text-[#0c1d3b] font-bold text-xs uppercase tracking-wider ml-1">Objetivo</span>}
-                    style={{ marginBottom: 20 }}
+                    label={<span className="text-[#0c1d3b] font-semibold">Objetivo</span>}
+                    style={{ marginBottom: 12 }}
                   >
+                    {/* Voltei para rows={2} para ficar mais visível */}
                     <Input.TextArea
                       rows={2}
                       placeholder="Breve descrição..."
-                      className="resize-none backdrop-blur-sm"
+                      className="resize-none"
                     />
                   </Form.Item>
 
-                  <Form.Item className="mb-0">
+                  <Form.Item className="mb-0 mt-2">
                     <Button
                       type="primary"
                       htmlType="submit"
                       block
-                      className="h-12 uppercase tracking-wide border-none bg-emerald-600 hover:!bg-emerald-500 text-white shadow-lg shadow-emerald-500/30 transition-all hover:scale-[1.02] active:scale-[0.98]"
+                      className="uppercase tracking-wide border-none bg-emerald-600 hover:!bg-emerald-500 text-white shadow-lg shadow-emerald-500/20 transition-all"
                     >
-                      Impulsionar Resultados
+                      Impulsionar
                     </Button>
                   </Form.Item>
                 </Form>

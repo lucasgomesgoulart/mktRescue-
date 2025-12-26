@@ -12,7 +12,9 @@ export default function Header() {
   };
 
   return (
-    <header className="relative bg-white/80 backdrop-blur-lg border-b border-gray-200/50 sticky top-0 z-50 shadow-lg shadow-black/5">
+    // ALTERAÇÃO AQUI: Mudamos de 'relative... sticky' para 'fixed top-0 w-full'
+    // Isso faz o header flutuar sobre o conteúdo sem ocupar espaço físico no fluxo da página
+    <header className="fixed top-0 left-0 right-0 w-full bg-white/80 backdrop-blur-lg border-b border-gray-200/50 z-50 shadow-lg shadow-black/5 transition-all duration-300">
       <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 pointer-events-none"></div>
       <nav className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
