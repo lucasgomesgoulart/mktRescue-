@@ -12,51 +12,50 @@ export default function Header() {
   };
 
   return (
-    // ALTERAÇÃO AQUI: Mudamos de 'relative... sticky' para 'fixed top-0 w-full'
-    // Isso faz o header flutuar sobre o conteúdo sem ocupar espaço físico no fluxo da página
-    <header className="fixed top-0 left-0 right-0 w-full bg-white/80 backdrop-blur-lg border-b border-gray-200/50 z-50 shadow-lg shadow-black/5 transition-all duration-300">
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 pointer-events-none"></div>
+    <header className="fixed top-0 left-0 right-0 w-full bg-white/80 backdrop-blur-lg border-b border-[#0c1d3b]/10 z-50 shadow-lg shadow-[#0c1d3b]/5 transition-all duration-300">
+      {/* Fundo decorativo sutil com as cores da marca (apenas 5% de opacidade) */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#0c1d3b]/5 to-emerald-500/5 pointer-events-none"></div>
+      
       <nav className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex items-center space-x-3 group">
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
-              <span className="text-white font-bold text-lg">M</span>
-            </div>
-            <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Marketing Rescue
-            </span>
+          <div className="flex items-center space-x-3 group" onClick={() => scrollToSection("hero")}>
+            <img
+              src="/mks-png.png"
+              alt="Logo Marketing Rescue"
+              className="w-48 h-48  object-contain transition-all duration-300"
+            />
           </div>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
             <button
               onClick={() => scrollToSection("hero")}
-              className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 relative group"
+              className="text-[#0c1d3b]/80 hover:text-emerald-600 font-medium transition-colors duration-200 relative group"
             >
               Início
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-600 transition-all duration-300 group-hover:w-full"></span>
             </button>
             <button
               onClick={() => scrollToSection("about")}
-              className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 relative group"
+              className="text-[#0c1d3b]/80 hover:text-emerald-600 font-medium transition-colors duration-200 relative group"
             >
               Quem Somos
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-600 transition-all duration-300 group-hover:w-full"></span>
             </button>
             <button
               onClick={() => scrollToSection("work")}
-              className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 relative group"
+              className="text-[#0c1d3b]/80 hover:text-emerald-600 font-medium transition-colors duration-200 relative group"
             >
               Serviços
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-600 transition-all duration-300 group-hover:w-full"></span>
             </button>
             <button
               onClick={() => scrollToSection("contact")}
-              className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 relative group"
+              className="text-[#0c1d3b]/80 hover:text-emerald-600 font-medium transition-colors duration-200 relative group"
             >
               Contato
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-600 transition-all duration-300 group-hover:w-full"></span>
             </button>
           </div>
 
@@ -64,12 +63,13 @@ export default function Header() {
           <div className="flex items-center space-x-4">
             <button
               onClick={() => scrollToSection("contact")}
-              className="hidden md:block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 transform"
+              // Botão com fundo Azul Escuro (marca) que fica Esmeralda no hover
+              className="hidden md:block bg-[#0c1d3b] text-white px-6 py-2 rounded-full font-medium hover:bg-emerald-600 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 transform"
             >
               Começar agora
             </button>
             <button
-              className="md:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors duration-200"
+              className="md:hidden p-2 rounded-lg text-[#0c1d3b] hover:bg-gray-100 transition-colors duration-200"
               onClick={() => setMobileOpen((v) => !v)}
               aria-label="Abrir menu"
             >
@@ -82,38 +82,38 @@ export default function Header() {
 
         {/* Mobile Menu */}
         <div
-          className={`md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-lg border-b border-gray-200/50 shadow-lg transition-all duration-300 ${
+          className={`md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-lg border-b border-[#0c1d3b]/10 shadow-lg transition-all duration-300 ${
             mobileOpen ? "block animate-slide-down" : "hidden"
           }`}
         >
           <div className="px-4 py-6 space-y-4">
             <button
               onClick={() => scrollToSection("hero")}
-              className="block w-full text-left text-gray-700 hover:text-blue-600 font-medium py-2 transition-colors duration-200"
+              className="block w-full text-left text-[#0c1d3b] hover:text-emerald-600 font-medium py-2 transition-colors duration-200"
             >
               Início
             </button>
             <button
               onClick={() => scrollToSection("about")}
-              className="block w-full text-left text-gray-700 hover:text-blue-600 font-medium py-2 transition-colors duration-200"
+              className="block w-full text-left text-[#0c1d3b] hover:text-emerald-600 font-medium py-2 transition-colors duration-200"
             >
               Quem Somos
             </button>
             <button
               onClick={() => scrollToSection("work")}
-              className="block w-full text-left text-gray-700 hover:text-blue-600 font-medium py-2 transition-colors duration-200"
+              className="block w-full text-left text-[#0c1d3b] hover:text-emerald-600 font-medium py-2 transition-colors duration-200"
             >
               Serviços
             </button>
             <button
               onClick={() => scrollToSection("contact")}
-              className="block w-full text-left text-gray-700 hover:text-blue-600 font-medium py-2 transition-colors duration-200"
+              className="block w-full text-left text-[#0c1d3b] hover:text-emerald-600 font-medium py-2 transition-colors duration-200"
             >
               Contato
             </button>
             <button
               onClick={() => scrollToSection("contact")}
-              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-full font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg mt-4"
+              className="w-full bg-[#0c1d3b] text-white px-6 py-3 rounded-full font-medium hover:bg-emerald-600 transition-all duration-300 shadow-lg mt-4"
             >
               Começar agora
             </button>
